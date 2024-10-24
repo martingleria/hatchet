@@ -1,8 +1,8 @@
-FROM golang:1.19-alpine as builder
-RUN apk update && apk add git bash build-base && rm -rf /var/cache/apk/* \
-  && mkdir -p /github.com/simagix/hatchet && cd /github.com/simagix \
-  && git clone --depth 1 https://github.com/simagix/hatchet.git
+FROM golang:1.21-alpine as builder
+RUN apk update && apk add git bash build-base \
+  && rm -rf /var/cache/apk/*
 WORKDIR /github.com/simagix/hatchet
+COPY . . 
 RUN ./build.sh
 FROM alpine
 LABEL Ken Chen <ken.chen@simagix.com>

@@ -12,9 +12,11 @@ TAG="simagix/hatchet"
 gover=$(go version | cut -d' ' -f3)
 [[ "$gover" < "go1.21" ]] && die "go version 1.21 or above it recommended."
 
-if [ ! -f go.sum ]; then
-    go mod tidy
-fi
+# if [ ! -f go.sum ]; then
+#     go mod tidy
+# fi
+
+go get -u && go mod tidy
 
 mkdir -p dist
 if [ "$1" == "docker" ]; then

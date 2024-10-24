@@ -12,6 +12,23 @@ The Hatchet provides many flexible ways to access data.  After processing logs, 
 
 Note that there are a few indexes created during the logs processings  But, you may create additional indexes to support additional needs.
 
+## Build and run with Docker
+
+Consider as example you have 2 log files you want to analyze, one of them is compressed and the other isn't.
+To continue with the example, you have mongo-1.log.gz and mongo-2.log files.
+Make sure to place these files in the logs folder on your host, in the root of the project.
+Then you need to run these commands to build the Docker image and then run it:
+
+```
+docker build -t hatchet .
+
+
+docker run --rm -v $(pwd)/logs:/logs \
+  -p 3721:3721 hatchet \
+  /hatchet -web /logs/mongo-1.log.gz /logs/mongo-2.log
+
+```
+
 ## View Available Reports
 The easiest way is to go to the home page `http://localhost:3721` and following the instructions to view available reports.  Each report is also available using its own URL with additional parameters defined in the query string.  Below are a few examples:
 
